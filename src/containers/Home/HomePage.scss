@@ -1,0 +1,126 @@
+.home-container {
+    background-color: #282c34;
+    height: 100vh;
+    display: flex;
+
+    .content-right {
+        width: calc(100% - 240px);
+        background: #F7F8FC;
+
+        .body-content {
+            margin: 0 20px;
+            height: 650px;
+            background: #FFFFFF;
+
+            .first-content {
+                display: flex;
+                gap: 50px;
+                background-color: white;
+
+                .content-left {
+                    width: 200px;
+                    height: 100px;
+                    border: 1px solid #363740;
+                    border-radius: 8px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                    gap: 10px;
+                    text-align: center;
+                    background-color: white;
+
+                    .text-content {
+                        font-family: 'Mulish';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 19px;
+                        line-height: 24px;
+                        letter-spacing: 0.4px;
+                    }
+
+                    .number {
+                        font-family: 'Mulish';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 35px;
+                        line-height: 50px;
+                        text-align: center;
+                        letter-spacing: 1px;
+                    }
+                }
+
+                .content-right {
+                    width: 200px;
+                    height: 100px;
+                    border: 1px solid #363740;
+                    border-radius: 8px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                    gap: 10px;
+                    text-align: center;
+                    background-color: white;
+
+                    .text-content {
+                        font-family: 'Mulish';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 19px;
+                        line-height: 24px;
+                        letter-spacing: 0.4px;
+                    }
+
+                    .number {
+                        font-family: 'Mulish';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 35px;
+                        line-height: 50px;
+                        text-align: center;
+                        letter-spacing: 1px;
+                    }
+                }
+            }
+
+            .second-content {
+                .first-row {
+                    display: flex;
+                    gap: 30px;
+
+                    .content-left {
+                        width: 400px;
+                        height: 250px;
+                        background: #000000;
+                        border-radius: 8px;
+                    }
+
+                    .content-right {
+                        width: 400px;
+                        height: 250px;
+                        background: #000000;
+                        border-radius: 8px;
+                    }
+                }
+
+                .second-row {
+                    display: flex;
+                    gap: 30px;
+
+                    .content-left {
+                        width: 400px;
+                        height: 250px;
+                        background: #000000;
+                        border-radius: 8px;
+                    }
+
+                    .content-right {
+                        width: 400px;
+                        height: 250px;
+                        background: #000000;
+                        border-radius: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
