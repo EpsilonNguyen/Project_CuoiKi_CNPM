@@ -1,20 +1,20 @@
 import { Component } from "react";
-import './Alert.scss';
+import './Statistic.scss';
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 
-class Alert extends Component {
+class Statistic extends Component {
     render() {
         return (
-            <div className="alert-container">
+            <div className="statistic-container">
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Alert Page</div>
+                    <div>Statistic Page</div>
                 </div>
             </div>
         )
     }
 }
 
-export default Alert;
+export default Statistic;

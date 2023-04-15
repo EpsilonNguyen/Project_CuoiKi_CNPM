@@ -1,20 +1,20 @@
 import { Component } from "react";
-import './Alert.scss';
+import './Register.scss';
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 
-class Alert extends Component {
+class Register extends Component {
     render() {
         return (
-            <div className="alert-container">
+            <div className="register-container">
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Alert Page</div>
+                    <div>Đăng kí</div>
                 </div>
             </div>
         )
     }
 }
 
-export default Alert;
+export default Register;
