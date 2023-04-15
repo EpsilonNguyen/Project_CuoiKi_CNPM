@@ -1,11 +1,16 @@
 import { Component } from "react";
 import './Login.scss';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
         }
+    }
+
+    handleOnClick = () => {
+        this.props.history.push('/home');
     }
 
     render() {
@@ -41,7 +46,7 @@ class Login extends Component {
                     </div>
                 </div>
 
-                <button className="btn-log-in">
+                <button className="btn-log-in" onClick={() => { this.handleOnClick() }}>
                     <span>Log In</span>
                 </button>
 
@@ -54,4 +59,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

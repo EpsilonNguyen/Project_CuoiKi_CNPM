@@ -10,7 +10,26 @@ class Area extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div className="body-content">Area Page</div>
+                    <div className="body-content">
+                        <div className="first-row pt-3">
+                            <div className="first-content">Home</div>
+                            <div className="second-content">
+                                <div className="sort"> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i><span>Sort</span></div>
+                                <div className="filter"><i class="fa fa-filter" aria-hidden="true"></i><span>Filter</span></div>
+                            </div>
+                        </div>
+                        <div className="second-row mt-5">
+                            <div className="first-content">
+                                <div><i class="fa fa-square-o" aria-hidden="true"></i></div>
+                                <div><span>ID</span></div>
+                            </div>
+                            <div className="second-content">
+                                <div><span>Serial</span></div>
+                                <div><span>Profile</span></div>
+                                <div><span>Activate</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
