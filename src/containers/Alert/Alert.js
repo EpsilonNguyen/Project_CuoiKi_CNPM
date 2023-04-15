@@ -10,7 +10,9 @@ class Alert extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Alert Page</div>
+                    <div className="body-content">
+                        Alert Page
+                    </div>
                 </div>
             </div>
         )

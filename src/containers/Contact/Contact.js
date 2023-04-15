@@ -10,7 +10,7 @@ class Contact extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Liên hệ</div>
+                    <div className="body-content">Liên hệ</div>
                 </div>
             </div>
         )

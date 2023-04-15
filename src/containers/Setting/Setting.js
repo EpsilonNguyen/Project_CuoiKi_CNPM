@@ -10,7 +10,7 @@ class Setting extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Cài đặt</div>
+                    <div className="body-content">Cài đặt</div>
                 </div>
             </div>
         )

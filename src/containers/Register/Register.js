@@ -10,7 +10,7 @@ class Register extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Đăng kí</div>
+                    <div className="body-content">Đăng kí</div>
                 </div>
             </div>
         )

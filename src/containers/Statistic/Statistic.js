@@ -10,7 +10,7 @@ class Statistic extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Statistic Page</div>
+                    <div className="body-content">Statistic Page</div>
                 </div>
             </div>
         )

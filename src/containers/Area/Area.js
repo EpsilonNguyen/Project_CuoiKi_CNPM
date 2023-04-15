@@ -10,7 +10,7 @@ class Area extends Component {
                 <Menu />
                 <div className="content-right">
                     <Header />
-                    <div>Area Page</div>
+                    <div className="body-content">Area Page</div>
                 </div>
             </div>
         )
