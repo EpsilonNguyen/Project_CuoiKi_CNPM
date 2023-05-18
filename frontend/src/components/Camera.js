@@ -1,9 +1,30 @@
 import { Component } from "react";
 import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
 import { BiBell } from 'react-icons/bi';
+import axios from '../page/axios';
 
 class Camera extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            listCamera: []
+        }
+    }
+
+    componentDidMount = async () => {
+        let result = await axios.get("/api/camera-manager");
+
+        console.log(">>> check res: ", result);
+        if (result.errCode === 0) {
+            this.setState({
+                listCamera: result.listCamera
+            })
+        }
+    }
+
     render() {
+        const { listCamera } = this.state;
+
         return (
             <div className=" bg-gray-200">
                 <div className="text-black">
@@ -26,7 +47,36 @@ class Camera extends Component {
                     </div>
                 </div>
                 <div className="bg-white h-[600px] mx-8">
+                    <div className="flex pt-5">
+                        <span className="font-bold ml-3">Camera</span>
+                        <div className="flex gap-8 text-[14px] ml-auto mr-5">
+                            <span>Sort</span>
+                            <span>Filter</span>
+                        </div>
+                    </div>
+                    <div className="mt-5">
+                        <table className="w-full">
+                            <tr className="border-black">
+                                <th>Serial</th>
+                                <th>Home ID</th>
+                                <th>Connection</th>
+                                <th>Security Level</th>
+                            </tr>
 
+                            {listCamera && listCamera.length > 0
+                                && listCamera.map((item, index) => {
+                                    return (
+                                        <tr key={index} className="border-t-2 border-gray-400 text-center">
+                                            <td>{item.serial}</td>
+                                            <td>{item.homeID}</td>
+                                            <td>{item.connection}</td>
+                                            <td>{item.securityLevel}</td>
+                                        </tr>
+                                    )
+                                })}
+
+                        </table>
+                    </div>
                 </div>
             </div>
         )

@@ -7,6 +7,7 @@ let initWebRoutes = (app) => {
 
     router.get("/", homeController.getHome);
 
+    router.get("/api/camera-manager", homeController.handleGetListCamera);
     router.post("/api/login", homeController.handleLogin);
 
     return app.use("/", router);
