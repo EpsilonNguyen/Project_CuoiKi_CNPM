@@ -28,30 +28,6 @@ let handleUserLogin = (email, password) => {
     })
 }
 
-let handleGetListCamera = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let listCamera = {};
-
-            let result = await db.Camera.findAll({
-                attributes: ['id', 'serial', 'homeID', 'connection', 'securityLevel'],
-                raw: true
-            });
-
-            if (result) {
-                listCamera.errCode = 0;
-                listCamera.errMessage = "Succeed!";
-                listCamera.list = result;
-            }
-
-            resolve(listCamera);
-        } catch (error) {
-            reject(error)
-        }
-    })
-}
-
 module.exports = {
     handleUserLogin: handleUserLogin,
-    handleGetListCamera: handleGetListCamera,
 }

@@ -2,31 +2,31 @@ import { Component } from "react";
 import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
 import { BiBell } from 'react-icons/bi';
 import axios from '../page/axios';
-import ModalAlert from "./ModalAlert";
+import ModalCamera from "./ModalCamera";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class Alert extends Component {
+class Area extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listAlert: [],
+            listCamera: [],
             isOpenModal: false,
-            alert: {},
+            camera: {},
             action: ''
         }
     }
 
     componentDidMount = async () => {
-        this.handleGetListAlert();
+        this.handleGetListCamera();
     }
 
-    handleGetListAlert = async () => {
-        let result = await axios.get("/api/get-list-alert");
+    handleGetListCamera = async () => {
+        let result = await axios.get("/api/get-list-camera");
 
         if (result.errCode === 0) {
             this.setState({
-                listAlert: result.listAlert
+                listCamera: result.listCamera
             })
         }
     }
@@ -43,7 +43,7 @@ class Alert extends Component {
         })
     }
 
-    handleAddAlert = async () => {
+    handleAddCamera = async () => {
         this.setState({
             action: 'ADD'
         });
@@ -51,78 +51,78 @@ class Alert extends Component {
         this.handleOpenModal();
     }
 
-    handleAddNewAlert = async (alert) => {
-        let result = await axios.post(`/api/add-new-alert`, { alert });
+    handleAddNewCamera = async (camera) => {
+        let result = await axios.post(`/api/add-new-camera`, { camera });
 
         if (result.errCode === 0) {
-            toast.success("Add new alert success!");
+            toast.success("Add new product success!");
         } else {
-            toast.error("Failed to add new alert!")
+            toast.error("Failed to add new product!")
         }
 
         this.handleCloseModal();
-        this.handleGetListAlert();
+        this.handleGetListCamera();
     }
 
-    handleFindAlertByID = async (id) => {
+    handleFindCameraByID = async (id) => {
         this.setState({
             action: 'EDIT'
         });
 
         this.handleOpenModal();
-        let result = await axios.get(`/api/get-alert-by-id?id=${id}`);
+        let result = await axios.get(`/api/get-camera-by-id?id=${id}`);
 
         if (result.errCode === 0) {
             this.setState({
-                alert: result.alert
+                camera: result.camera
             })
         }
     }
 
-    handleSaveAlert = async (alert) => {
-        let result = await axios.put("/api/edit-alert-by-id", { alert });
+    handleSaveCamera = async (camera) => {
+        let result = await axios.put("/api/edit-camera-by-id", { camera });
 
         if (result.errCode === 0) {
-            toast.success("Update alert success!");
+            toast.success("Update camera success!");
         } else {
-            toast.error("Failed to update alert!")
+            toast.error("Failed to update camera!")
         }
 
         this.handleCloseModal();
-        this.handleGetListAlert();
+        this.handleGetListCamera();
     }
 
-    handleDeleteAlert = async (id) => {
-        let result = await axios.delete(`/api/delete-alert`, { data: { id } });
+    handleDeleteCamera = async (id) => {
+        let result = await axios.delete(`/api/delete-camera`, { data: { id } });
 
         if (result.errCode === 0) {
-            toast.success("Delete alert success!");
+            toast.success("Delete camera success!");
         } else {
-            toast.error("Failed to delete alert!")
+            toast.error("Failed to detele camera!")
         }
 
-        this.handleGetListAlert();
+        this.handleGetListCamera();
     }
 
     render() {
-        const { listAlert } = this.state;
+        const { listCamera } = this.state;
 
         return (
             <>
-                <ModalAlert
+                <ModalCamera
                     action={this.state.action}
-                    alert={this.state.alert}
+                    camera={this.state.camera}
                     isOpenModal={this.state.isOpenModal}
                     handleCloseModal={this.handleCloseModal}
-                    handleSaveAlert={this.handleSaveAlert}
-                    handleAddNewAlert={this.handleAddNewAlert}
+                    handleSaveCamera={this.handleSaveCamera}
+                    handleAddNewCamera={this.handleAddNewCamera}
                 />
                 <div className=" bg-gray-200">
                     <div className="text-black">
                         <div className="flex gap-3 w-[1330px] h-24 pt-8">
                             <div className="flex gap-3 ml-2">
                                 <AiOutlineHome size={25} />
-                                <span className="font-bold text-xl">Cảnh báo</span>
+                                <span className="font-bold text-xl">Quản lí Area</span>
                             </div>
                             <div className="flex gap-8 ml-auto mr-8">
                                 <div className="flex gap-3">
@@ -139,39 +139,38 @@ class Alert extends Component {
                     </div>
                     <div className="bg-white h-[600px] mx-8">
                         <div className="flex pt-5">
-                            <span className="font-bold ml-3">Lịch sử cảnh báo</span>
+                            <span className="font-bold ml-3">Area</span>
                             <div className="flex gap-8 text-[14px] ml-auto mr-24">
-                                <button onClick={() => { this.handleAddAlert() }}
+                                <button onClick={() => { this.handleAddCamera() }}
                                     type="button" className="bg-teal-400 text-white rounded-xl px-2 py-1 hover:scale-110">
-                                    Add Alert
+                                    Add Area
                                 </button>
                             </div>
                         </div>
                         <div className="mt-5">
                             <table className="w-full">
                                 <tr className="border-black">
-                                    <th>Nội dung</th>
-                                    <th>Khu vực</th>
+                                    <th>ID</th>
                                     <th>Serial</th>
-                                    <th>Mức độ</th>
+                                    <th>Profile</th>
+                                    <th>Activate</th>
                                     <th>Action</th>
                                 </tr>
 
-                                {listAlert && listAlert.length > 0
-                                    && listAlert.map((item, index) => {
+                                {listCamera && listCamera.length > 0
+                                    && listCamera.map((item, index) => {
                                         return (
                                             <tr key={index} className="border-t-2 border-gray-400 text-center">
-                                                <td>{item.message}</td>
-                                                {/* <td>{item.AreaData.serial}</td> */}
-                                                <td>{item.id_area}</td>
                                                 <td>{item.serial}</td>
-                                                <td>{item.level}</td>
+                                                <td>{item.homeID}</td>
+                                                <td>{item.connection}</td>
+                                                <td>{item.securityLevel}</td>
                                                 <td>
-                                                    <button onClick={() => { this.handleFindAlertByID(item.id) }}
+                                                    <button onClick={() => { this.handleFindCameraByID(item.id) }}
                                                         type="button" className="bg-green-500 text-white rounded-xl px-2 py-1 hover:scale-110 mr-2">
                                                         Edit
                                                     </button>
-                                                    <button onClick={() => { this.handleDeleteAlert(item.id) }}
+                                                    <button onClick={() => { this.handleDeleteCamera(item.id) }}
                                                         type="button" className="bg-red-500 text-white rounded-xl px-2 py-1 hover:scale-110">
                                                         Delete
                                                     </button>
@@ -189,4 +188,4 @@ class Alert extends Component {
     }
 }
 
-export default Alert;
+export default Area;

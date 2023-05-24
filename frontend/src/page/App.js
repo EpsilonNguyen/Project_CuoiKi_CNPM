@@ -1,5 +1,6 @@
 import Login from "./Auth/Login";
 import HomePage from "./Admin/HomePage";
+import { ToastContainer } from "react-toastify";
 
 import {
   BrowserRouter,
@@ -10,16 +11,19 @@ import {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact>
-          <Login />
-        </Route>
-        <Route path="/home">
-          <HomePage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact>
+            <Login />
+          </Route>
+          <Route path="/home">
+            <HomePage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   );
 }
 

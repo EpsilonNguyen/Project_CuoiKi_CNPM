@@ -28,33 +28,7 @@ let handleLogin = async (req, res) => {
     })
 }
 
-let handleGetListCamera = async (req, res) => {
-    try {
-        let result = await homeService.handleGetListCamera();
-
-        if (result) {
-            return res.status(200).json({
-                errCode: result.errCode,
-                errMessage: result.errMessage,
-                listCamera: result.list ? result.list : []
-            })
-        }
-
-        return res.status(500).json({
-            errCode: 2,
-            errMessage: 'No data!'
-        })
-
-    } catch (error) {
-        return res.status(500).json({
-            errCode: 1,
-            errMessage: 'Error from server!'
-        })
-    }
-}
-
 module.exports = {
     getHome: getHome,
     handleLogin: handleLogin,
-    handleGetListCamera: handleGetListCamera,
 }

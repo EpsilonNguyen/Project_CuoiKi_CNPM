@@ -3,6 +3,9 @@ import Menu from "../../components/Menu";
 import Home from "../../components/Home";
 import Camera from "../../components/Camera";
 import Alert from "../../components/Alert";
+import Contact from "../../components/Contact";
+import Area from "../../components/Area";
+import ChartAlert from "../../components/ChartAlert";
 
 class HomePage extends Component {
     constructor(props) {
@@ -30,6 +33,9 @@ class HomePage extends Component {
                 {label === 'home' && <Home />}
                 {label === 'camera' && <Camera />}
                 {label === 'alert' && <Alert />}
+                {label === 'area' && <Area />}
+                {label === 'contact' && <Contact />}
+                {label === 'chart' && <ChartAlert />}
             </div>
         )
     }

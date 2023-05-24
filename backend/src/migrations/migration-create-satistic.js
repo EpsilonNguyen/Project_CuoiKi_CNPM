@@ -2,27 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('Cameras', {
+        await queryInterface.createTable('Satistics', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            profile: {
+                type: Sequelize.STRING
+            },
+            area: {
+                type: Sequelize.STRING
+            },
             serial: {
                 type: Sequelize.STRING
             },
-            homeID: {
-                type: Sequelize.STRING
-            },
-            id_area: {
-                type: Sequelize.INTEGER
-            },
-            connection: {
-                type: Sequelize.STRING
-            },
-            securityLevel: {
-                type: Sequelize.STRING
+            time: {
+                type: Sequelize.DATE
             },
             createdAt: {
                 allowNull: false,
@@ -35,6 +32,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Cameras');
+        await queryInterface.dropTable('Satistics');
     }
 };
