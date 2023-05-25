@@ -23,8 +23,16 @@ ChartJS.register(
 );
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const data = [5, 6, 7, 4, 3, 5, 6.5];
 
 class ChartAlert extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 5,
+        }
+    }
+
     options = {
         responsive: true,
         plugins: {
@@ -33,7 +41,7 @@ class ChartAlert extends Component {
             },
             title: {
                 display: true,
-                text: 'Khu vực A',
+                text: 'Khu vực 1',
             },
         },
     };
@@ -44,7 +52,7 @@ class ChartAlert extends Component {
             {
                 id: 1,
                 label: 'Dataset1',
-                data: [5, 6, 7, 4, 3, 5, 6.5],
+                data: data,
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
         ],

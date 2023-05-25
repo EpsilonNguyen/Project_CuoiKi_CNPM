@@ -1,8 +1,28 @@
 import { Component } from "react";
 import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
 import { BiBell } from 'react-icons/bi';
+import Camera from '../images/camera_giam_sat.jpg';
+import axios from '../page/axios';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        }
+    }
+
+    componentDidMount = async () => {
+        // const result = await axios.get('/api/get-count-alert');
+        const result = await axios.get('/api/get-count-camera');
+
+        if (result.errCode === 0) {
+            this.setState({
+                count: result.count
+            })
+        }
+    }
+
     render() {
         return (
             <div className=" bg-gray-200">
@@ -25,8 +45,25 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="bg-white h-[600px] mx-8">
-
+                <div className="bg-white h-[700px] mx-8">
+                    <div className="flex justify-center gap-8">
+                        <div className="text-center pt-5 font-bold border-2 border-black h-32 w-56 rounded-xl">
+                            <div className=" text-[24px]">Tổng Camera</div>
+                            <div className=" text-[40px]">{this.state.count}</div>
+                        </div>
+                        <div className="text-center pt-5 font-bold border-2 border-black h-32 w-56 rounded-xl">
+                            <div className=" text-[24px]">Tổng số Profile</div>
+                            <div className=" text-[40px]">8</div>
+                        </div>
+                    </div>
+                    <div className="flex gap-8 justify-center mt-5">
+                        <img src={Camera} alt='camera' className="h-[250px] cursor-pointer hover:scale-110 transition" />
+                        <img src={Camera} alt='camera' className="h-[250px] cursor-pointer hover:scale-110 transition" />
+                    </div>
+                    <div className="flex gap-8 justify-center mt-5">
+                        <img src={Camera} alt='camera' className="h-[250px] cursor-pointer hover:scale-110 transition" />
+                        <img src={Camera} alt='camera' className="h-[250px] cursor-pointer hover:scale-110 transition" />
+                    </div>
                 </div>
             </div>
         )

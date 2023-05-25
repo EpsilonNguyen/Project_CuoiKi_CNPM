@@ -9,9 +9,8 @@ class ModalArea extends React.Component {
         this.state = {
             id: '',
             serial: '',
-            homeID: '',
-            connecting: '',
-            securityLevel: ''
+            profile: '',
+            activate: '',
         }
     }
 
@@ -27,14 +26,13 @@ class ModalArea extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.camera !== this.props.camera) {
-            let { camera } = this.props;
+        if (prevProps.area !== this.props.area) {
+            let { area } = this.props;
             this.setState({
-                id: camera.id,
-                serial: camera.serial,
-                homeID: camera.homeID,
-                connecting: camera.connection,
-                securityLevel: camera.securityLevel
+                id: area.id,
+                serial: area.serial,
+                profile: area.profile,
+                activate: area.activate,
             })
         }
     }
@@ -47,13 +45,13 @@ class ModalArea extends React.Component {
         })
     }
 
-    handleSaveCamera = () => {
+    handleSaveArea = () => {
         const { action } = this.props;
         if (action === 'EDIT') {
-            this.props.handleSaveCamera(this.state);
+            this.props.handleSaveArea(this.state);
         }
         else if (action === 'ADD') {
-            this.props.handleAddNewCamera(this.state);
+            this.props.handleAddNewArea(this.state);
         }
     }
 
@@ -70,15 +68,9 @@ class ModalArea extends React.Component {
                 style={this.customStyles}
             >
                 <div className='flex flex-col gap-4'>
-                    {action === 'EDIT' ?
-                        <input type='hidden' onChange={(event) => { this.handleOnChangeInput(event, 'id') }}
-                            value={this.state.id} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
-                        :
-                        <></>
-                    }
                     <div className='flex'>
                         <div className='text-teal-400 font-bold text-2xl'>
-                            {action === 'EDIT' ? 'Edit Camera' : 'Add Camera'}
+                            {action === 'EDIT' ? 'Edit Area' : 'Add Area'}
                         </div>
                         <div className='ml-auto'>
                             <button className='hover:scale-110 hover:text-red-500'
@@ -88,32 +80,36 @@ class ModalArea extends React.Component {
                         </div>
                     </div>
                     <div className='flex gap-3'>
+                        {action === 'EDIT' ?
+                            <div className='flex flex-col'>
+                                <label>ID</label>
+                                <input type='text' value={this.state.id} disabled
+                                    className='border-2 border-black rounded-xl w-56 px-2 py-1' />
+                            </div>
+                            :
+                            <></>
+                        }
                         <div className='flex flex-col'>
                             <label>Serial</label>
                             <input type='text' onChange={(event) => { this.handleOnChangeInput(event, 'serial') }}
                                 value={this.state.serial} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
                         </div>
-                        <div className='flex flex-col'>
-                            <label>Home ID</label>
-                            <input type='text' onChange={(event) => { this.handleOnChangeInput(event, 'homeID') }}
-                                value={this.state.homeID} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
-                        </div>
                     </div>
                     <div className='flex gap-3'>
                         <div className='flex flex-col'>
-                            <label>Connecting</label>
-                            <input type='text' onChange={(event) => { this.handleOnChangeInput(event, 'connecting') }}
-                                value={this.state.connecting} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
+                            <label>Profile</label>
+                            <input type='text' onChange={(event) => { this.handleOnChangeInput(event, 'profile') }}
+                                value={this.state.profile} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
                         </div>
                         <div className='flex flex-col'>
-                            <label>Security Level</label>
-                            <input type='text' onChange={(event) => { this.handleOnChangeInput(event, 'securityLevel') }}
-                                value={this.state.securityLevel} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
+                            <label>Activate</label>
+                            <input type='text' onChange={(event) => { this.handleOnChangeInput(event, 'activate') }}
+                                value={this.state.activate} className='border-2 border-black rounded-xl w-56 px-2 py-1' />
                         </div>
                     </div>
                     <div className='flex gap-2 justify-end'>
                         <button className='bg-green-500 text-white w-16 rounded-md cursor-pointer hover:scale-110 py-1'
-                            onClick={() => this.handleSaveCamera()}>
+                            onClick={() => this.handleSaveArea()}>
                             {action === 'EDIT' ? 'Save' : 'Add'}
                         </button>
                         <button className='bg-red-500 text-white w-16 rounded-md cursor-pointer hover:scale-110 py-1'

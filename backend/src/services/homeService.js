@@ -10,14 +10,16 @@ let handleUserLogin = (email, password) => {
 
             let user = await db.Account.findOne({
                 attributes: ['id', 'email', 'password'],
-                where: { email: email },
+                where: {
+                    email: email,
+                    password: password
+                },
                 raw: true
             });
 
             if (user) {
                 //compare password
                 userData.errCode = 0;
-                userData.errMessage = "Succeed!"
                 userData.user = user;
             }
 

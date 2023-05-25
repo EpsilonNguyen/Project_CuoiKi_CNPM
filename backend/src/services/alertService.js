@@ -1,4 +1,5 @@
 import db from "../models/index";
+import moment from 'moment';
 
 let handleGetListAlert = () => {
     return new Promise(async (resolve, reject) => {
@@ -119,12 +120,14 @@ let handleAddNewAlert = (data) => {
         try {
             if (data) {
                 await db.Alert.create({
-                    name: 'Cảnh báo 2',
+                    name: data.name,
                     serial: data.serial,
                     message: data.message,
                     id_area: data.id_area,
-                    id_camera: 1,
+                    id_camera: data.id_camera,
                     level: data.level,
+                    startTime: data.startTime,
+                    endTime: data.endTime,
                 });
 
                 resolve({
@@ -141,10 +144,61 @@ let handleAddNewAlert = (data) => {
     })
 }
 
+let handleGetCountAlert = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = {
+                id_area: 1,
+                month: [1, 2, 3, 4, 5]
+            }
+
+            let count = [];
+
+            let result = await db.Alert.findAll({
+                where: {
+                    id_area: data.id_area,
+                },
+                raw: true
+            });
+
+            let formatresult = result.map((item) => {
+                if (item.updatedAt) {
+                    item.updatedAt = moment(item.updatedAt).month() + 1;
+                }
+                return (item);
+            })
+
+            formatresult.map((item) => {
+                if (item.updatedAt === data.month) {
+                    count += 1;
+                }
+            })
+
+            console.log(">>> check count: ", count);
+
+            // let result = await db.Alert.count();
+
+            if (result) {
+                resolve({
+                    errCode: 0,
+                    count: result
+                });
+            }
+
+            resolve({
+                errCode: 3,
+            });
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     handleGetListAlert: handleGetListAlert,
     handleGetAlertByID: handleGetAlertByID,
     handleEditAlertByID: handleEditAlertByID,
     handleDeleteAlert: handleDeleteAlert,
     handleAddNewAlert: handleAddNewAlert,
+    handleGetCountAlert: handleGetCountAlert
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import axios from "../axios"; // cho phep goi tu client den server nodejs
+import axios from "../axios";
+import { toast } from "react-toastify";
 
 class Login extends React.Component {
     constructor(props) {
@@ -12,9 +13,18 @@ class Login extends React.Component {
     }
 
     handleOnClick = async () => {
-        let user = await axios.post("/api/login", { email: this.state.email, password: this.state.password });
-        if (user.errCode === 0) {
-            this.props.history.push('/home');
+        if (!this.state.email || !this.state.password) {
+            toast.error("Missing require input data!");
+            return;
+        }
+        else {
+            let user = await axios.post("/api/login", { email: this.state.email, password: this.state.password });
+            if (user.errCode === 0) {
+                this.props.history.push('/home');
+            }
+            else if (user.errCode !== 0) {
+                toast.error("Wrong input data!");
+            }
         }
     }
 

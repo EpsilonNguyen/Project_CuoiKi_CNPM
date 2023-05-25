@@ -81,7 +81,26 @@ let handleDeleteAlert = async (req, res) => {
 
 let handleAddNewAlert = async (req, res) => {
     try {
-        let result = await alertService.handleAddNewAlert(req.body.alert);
+        let result = await alertService.handleAddNewAlert(req.body.data);
+
+        if (result) {
+            return res.status(200).json(result)
+        }
+
+        return res.status(500).json({
+            errCode: 2,
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            errCode: 1,
+        })
+    }
+}
+
+let handleGetCountAlert = async (req, res) => {
+    try {
+        let result = await alertService.handleGetCountAlert();
 
         if (result) {
             return res.status(200).json(result)
@@ -103,5 +122,6 @@ module.exports = {
     handleGetAlertByID: handleGetAlertByID,
     handleEditAlertByID: handleEditAlertByID,
     handleDeleteAlert: handleDeleteAlert,
-    handleAddNewAlert: handleAddNewAlert
+    handleAddNewAlert: handleAddNewAlert,
+    handleGetCountAlert: handleGetCountAlert
 }

@@ -1,16 +1,12 @@
 import { Component } from "react";
 import Menu from "../../components/Menu";
-import Home from "../../components/Home";
-import Camera from "../../components/Camera";
-import Alert from "../../components/Alert";
-import Area from "../../components/Area";
-import ChartAlert from "../../components/ChartAlert";
+import AddAlert from "../../components/AddAlert";
 
-class HomePage extends Component {
+class AlertPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: 'home'
+            label: 'alert'
         }
     }
 
@@ -29,14 +25,10 @@ class HomePage extends Component {
                     label={this.state.label}
                     handleOnClickLabel={this.handleOnClickLabel}
                 />
-                {label === 'home' && <Home />}
-                {label === 'camera' && <Camera />}
-                {label === 'alert' && <Alert />}
-                {label === 'area' && <Area />}
-                {label === 'chart' && <ChartAlert />}
+                <AddAlert />
             </div>
         )
     }
 }
 
-export default HomePage;
+export default AlertPage;

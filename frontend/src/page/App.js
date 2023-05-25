@@ -1,6 +1,7 @@
 import Login from "./Auth/Login";
 import HomePage from "./Admin/HomePage";
 import { ToastContainer } from "react-toastify";
+import AlertPage from "./Admin/AlertPage";
 
 import {
   BrowserRouter,
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/home">
             <HomePage />
+          </Route>
+          <Route path="/add-alert">
+            <AlertPage />
           </Route>
         </Switch>
       </BrowserRouter>

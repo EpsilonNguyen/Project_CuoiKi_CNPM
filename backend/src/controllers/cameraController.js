@@ -25,6 +25,25 @@ let handleGetListCamera = async (req, res) => {
     }
 }
 
+let handleGetCountCamera = async (req, res) => {
+    try {
+        let result = await cameraService.handleGetCountCamera();
+
+        if (result) {
+            return res.status(200).json(result)
+        }
+
+        return res.status(500).json({
+            errCode: 2,
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            errCode: 1,
+        })
+    }
+}
+
 let handleGetCameraByID = async (req, res) => {
     try {
         let result = await cameraService.handleGetCameraByID(req.query.id);
@@ -106,5 +125,6 @@ module.exports = {
     handleGetCameraByID: handleGetCameraByID,
     handleEditCameraByID: handleEditCameraByID,
     handleDeleteCamera: handleDeleteCamera,
-    handleAddNewCamera: handleAddNewCamera
+    handleAddNewCamera: handleAddNewCamera,
+    handleGetCountCamera: handleGetCountCamera
 }

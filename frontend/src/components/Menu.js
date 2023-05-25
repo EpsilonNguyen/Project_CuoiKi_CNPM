@@ -48,9 +48,7 @@ class Menu extends Component {
                     <BsBarChartFill size={20} />
                     <span>Thống kê</span>
                 </div>
-                <div onClick={() => { handleOnClickLabel("contact") }}
-                    className={label === "contact" ? "flex gap-5 pl-8 py-3 cursor-pointer opacity-75 border-t-2 border-gray-500"
-                        : "flex gap-5 pl-8 py-3 cursor-pointer hover:bg-gray-500 border-t-2 border-gray-500"}>
+                <div className="flex gap-5 pl-8 py-3 cursor-pointer hover:bg-gray-500">
                     <BsPeople size={20} />
                     <span>Liên hệ</span>
                 </div>

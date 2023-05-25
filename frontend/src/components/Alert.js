@@ -1,10 +1,12 @@
 import { Component } from "react";
 import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
 import { BiBell } from 'react-icons/bi';
+import { HiBellAlert } from 'react-icons/hi2';
 import axios from '../page/axios';
 import ModalAlert from "./ModalAlert";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { withRouter } from "react-router-dom";
 
 class Alert extends Component {
     constructor(props) {
@@ -44,11 +46,12 @@ class Alert extends Component {
     }
 
     handleAddAlert = async () => {
-        this.setState({
-            action: 'ADD'
-        });
+        // this.setState({
+        //     action: 'ADD'
+        // });
 
-        this.handleOpenModal();
+        // this.handleOpenModal();
+        this.props.history.push('/add-alert');
     }
 
     handleAddNewAlert = async (alert) => {
@@ -121,7 +124,7 @@ class Alert extends Component {
                     <div className="text-black">
                         <div className="flex gap-3 w-[1330px] h-24 pt-8">
                             <div className="flex gap-3 ml-2">
-                                <AiOutlineHome size={25} />
+                                <HiBellAlert size={25} />
                                 <span className="font-bold text-xl">Cảnh báo</span>
                             </div>
                             <div className="flex gap-8 ml-auto mr-8">
@@ -165,7 +168,9 @@ class Alert extends Component {
                                                 {/* <td>{item.AreaData.serial}</td> */}
                                                 <td>{item.id_area}</td>
                                                 <td>{item.serial}</td>
-                                                <td>{item.level}</td>
+                                                {item.level === 'Low' && <td className="text-gray-500 font-bold">{item.level}</td>}
+                                                {item.level === 'Medium' && <td className="text-green-500 font-bold">{item.level}</td>}
+                                                {item.level === 'High' && <td className="text-red-500 font-bold">{item.level}</td>}
                                                 <td>
                                                     <button onClick={() => { this.handleFindAlertByID(item.id) }}
                                                         type="button" className="bg-green-500 text-white rounded-xl px-2 py-1 hover:scale-110 mr-2">
@@ -189,4 +194,4 @@ class Alert extends Component {
     }
 }
 
-export default Alert;
+export default withRouter(Alert);

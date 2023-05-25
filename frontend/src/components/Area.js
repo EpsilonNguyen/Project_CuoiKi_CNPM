@@ -1,8 +1,9 @@
 import { Component } from "react";
 import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
 import { BiBell } from 'react-icons/bi';
+import { TbChartAreaLine } from 'react-icons/tb';
 import axios from '../page/axios';
-import ModalCamera from "./ModalCamera";
+import ModalArea from "./ModalArea";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,23 +11,23 @@ class Area extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listCamera: [],
+            listArea: [],
             isOpenModal: false,
-            camera: {},
+            area: {},
             action: ''
         }
     }
 
     componentDidMount = async () => {
-        this.handleGetListCamera();
+        this.handleGetListArea();
     }
 
-    handleGetListCamera = async () => {
-        let result = await axios.get("/api/get-list-camera");
+    handleGetListArea = async () => {
+        let result = await axios.get("/api/get-list-area");
 
         if (result.errCode === 0) {
             this.setState({
-                listCamera: result.listCamera
+                listArea: result.listArea
             })
         }
     }
@@ -43,7 +44,7 @@ class Area extends Component {
         })
     }
 
-    handleAddCamera = async () => {
+    handleAddArea = async () => {
         this.setState({
             action: 'ADD'
         });
@@ -51,77 +52,77 @@ class Area extends Component {
         this.handleOpenModal();
     }
 
-    handleAddNewCamera = async (camera) => {
-        let result = await axios.post(`/api/add-new-camera`, { camera });
+    handleAddNewArea = async (area) => {
+        let result = await axios.post(`/api/add-new-area`, { area });
 
         if (result.errCode === 0) {
-            toast.success("Add new product success!");
+            toast.success("Add new area success!");
         } else {
-            toast.error("Failed to add new product!")
+            toast.error("Failed to add new area!")
         }
 
         this.handleCloseModal();
-        this.handleGetListCamera();
+        this.handleGetListArea();
     }
 
-    handleFindCameraByID = async (id) => {
+    handleFindAreaByID = async (id) => {
         this.setState({
             action: 'EDIT'
         });
 
         this.handleOpenModal();
-        let result = await axios.get(`/api/get-camera-by-id?id=${id}`);
+        let result = await axios.get(`/api/get-area-by-id?id=${id}`);
 
         if (result.errCode === 0) {
             this.setState({
-                camera: result.camera
+                area: result.area
             })
         }
     }
 
-    handleSaveCamera = async (camera) => {
-        let result = await axios.put("/api/edit-camera-by-id", { camera });
+    handleSaveArea = async (area) => {
+        let result = await axios.put("/api/edit-area-by-id", { area });
 
         if (result.errCode === 0) {
-            toast.success("Update camera success!");
+            toast.success("Update area success!");
         } else {
-            toast.error("Failed to update camera!")
+            toast.error("Failed to update area!")
         }
 
         this.handleCloseModal();
-        this.handleGetListCamera();
+        this.handleGetListArea();
     }
 
-    handleDeleteCamera = async (id) => {
-        let result = await axios.delete(`/api/delete-camera`, { data: { id } });
+    handleDeleteArea = async (id) => {
+        let result = await axios.delete(`/api/delete-area`, { data: { id } });
 
         if (result.errCode === 0) {
-            toast.success("Delete camera success!");
+            toast.success("Delete area success!");
         } else {
-            toast.error("Failed to detele camera!")
+            toast.error("Failed to detele area!")
         }
 
-        this.handleGetListCamera();
+        this.handleGetListArea();
     }
 
     render() {
-        const { listCamera } = this.state;
+        const { listArea } = this.state;
 
         return (
             <>
-                <ModalCamera
+                <ModalArea
                     action={this.state.action}
-                    camera={this.state.camera}
+                    area={this.state.area}
                     isOpenModal={this.state.isOpenModal}
                     handleCloseModal={this.handleCloseModal}
-                    handleSaveCamera={this.handleSaveCamera}
-                    handleAddNewCamera={this.handleAddNewCamera}
+                    handleSaveArea={this.handleSaveArea}
+                    handleAddNewArea={this.handleAddNewArea}
                 />
                 <div className=" bg-gray-200">
                     <div className="text-black">
                         <div className="flex gap-3 w-[1330px] h-24 pt-8">
                             <div className="flex gap-3 ml-2">
-                                <AiOutlineHome size={25} />
+                                <TbChartAreaLine size={25} />
                                 <span className="font-bold text-xl">Quản lí Area</span>
                             </div>
                             <div className="flex gap-8 ml-auto mr-8">
@@ -141,7 +142,7 @@ class Area extends Component {
                         <div className="flex pt-5">
                             <span className="font-bold ml-3">Area</span>
                             <div className="flex gap-8 text-[14px] ml-auto mr-24">
-                                <button onClick={() => { this.handleAddCamera() }}
+                                <button onClick={() => { this.handleAddArea() }}
                                     type="button" className="bg-teal-400 text-white rounded-xl px-2 py-1 hover:scale-110">
                                     Add Area
                                 </button>
@@ -157,20 +158,22 @@ class Area extends Component {
                                     <th>Action</th>
                                 </tr>
 
-                                {listCamera && listCamera.length > 0
-                                    && listCamera.map((item, index) => {
+                                {listArea && listArea.length > 0
+                                    && listArea.map((item, index) => {
                                         return (
                                             <tr key={index} className="border-t-2 border-gray-400 text-center">
+                                                <td>{item.id}</td>
                                                 <td>{item.serial}</td>
-                                                <td>{item.homeID}</td>
-                                                <td>{item.connection}</td>
-                                                <td>{item.securityLevel}</td>
+                                                <td>{item.profile}</td>
+                                                {item.activate === 'Low' && <td className="text-gray-500 font-bold">{item.activate}</td>}
+                                                {item.activate === 'Medium' && <td className="text-green-500 font-bold">{item.activate}</td>}
+                                                {item.activate === 'High' && <td className="text-red-500 font-bold">{item.activate}</td>}
                                                 <td>
-                                                    <button onClick={() => { this.handleFindCameraByID(item.id) }}
+                                                    <button onClick={() => { this.handleFindAreaByID(item.id) }}
                                                         type="button" className="bg-green-500 text-white rounded-xl px-2 py-1 hover:scale-110 mr-2">
                                                         Edit
                                                     </button>
-                                                    <button onClick={() => { this.handleDeleteCamera(item.id) }}
+                                                    <button onClick={() => { this.handleDeleteArea(item.id) }}
                                                         type="button" className="bg-red-500 text-white rounded-xl px-2 py-1 hover:scale-110">
                                                         Delete
                                                     </button>

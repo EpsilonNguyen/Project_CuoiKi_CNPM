@@ -23,6 +23,27 @@ let handleGetListCamera = () => {
     })
 }
 
+let handleGetCountCamera = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let result = await db.Camera.count();
+
+            if (result) {
+                resolve({
+                    errCode: 0,
+                    count: result
+                });
+            }
+
+            resolve({
+                errCode: 3,
+            });
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 let handleGetCameraByID = (inputId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -143,4 +164,5 @@ module.exports = {
     handleEditCameraByID: handleEditCameraByID,
     handleDeleteCamera: handleDeleteCamera,
     handleAddNewCamera: handleAddNewCamera,
+    handleGetCountCamera: handleGetCountCamera,
 }

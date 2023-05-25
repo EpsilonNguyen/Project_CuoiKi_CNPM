@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineSearch, AiOutlineCamera } from 'react-icons/ai';
 import { BiBell } from 'react-icons/bi';
 import axios from '../page/axios';
 import ModalCamera from "./ModalCamera";
@@ -121,7 +121,7 @@ class Camera extends Component {
                     <div className="text-black">
                         <div className="flex gap-3 w-[1330px] h-24 pt-8">
                             <div className="flex gap-3 ml-2">
-                                <AiOutlineHome size={25} />
+                                <AiOutlineCamera size={25} />
                                 <span className="font-bold text-xl">Quản lí Camera</span>
                             </div>
                             <div className="flex gap-8 ml-auto mr-8">
@@ -163,8 +163,14 @@ class Camera extends Component {
                                             <tr key={index} className="border-t-2 border-gray-400 text-center">
                                                 <td>{item.serial}</td>
                                                 <td>{item.homeID}</td>
-                                                <td>{item.connection}</td>
-                                                <td>{item.securityLevel}</td>
+                                                {item.connection === 'Connecting' ?
+                                                    <td className="text-green-500 font-bold">{item.connection}</td>
+                                                    :
+                                                    <td className="text-red-500 font-bold">{item.connection}</td>
+                                                }
+                                                {item.securityLevel === 'Low' && <td className="text-gray-500 font-bold">{item.securityLevel}</td>}
+                                                {item.securityLevel === 'Medium' && <td className="text-green-500 font-bold">{item.securityLevel}</td>}
+                                                {item.securityLevel === 'High' && <td className="text-red-500 font-bold">{item.securityLevel}</td>}
                                                 <td>
                                                     <button onClick={() => { this.handleFindCameraByID(item.id) }}
                                                         type="button" className="bg-green-500 text-white rounded-xl px-2 py-1 hover:scale-110 mr-2">
