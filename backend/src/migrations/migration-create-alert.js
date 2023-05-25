@@ -2,26 +2,41 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('Cameras', {
+        await queryInterface.createTable('Alerts', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            serial: {
+            name: {
                 type: Sequelize.STRING
             },
-            homeID: {
+            message: {
                 type: Sequelize.STRING
             },
             id_area: {
                 type: Sequelize.INTEGER
             },
-            connection: {
+            id_camera: {
+                type: Sequelize.INTEGER
+            },
+            serial: {
                 type: Sequelize.STRING
             },
-            securityLevel: {
+            level: {
+                type: Sequelize.STRING
+            },
+            playback: {
+                type: Sequelize.STRING
+            },
+            image: {
+                type: Sequelize.STRING
+            },
+            startTime: {
+                type: Sequelize.STRING
+            },
+            endTime: {
                 type: Sequelize.STRING
             },
             createdAt: {
@@ -35,6 +50,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Cameras');
+        await queryInterface.dropTable('Alerts');
     }
 };

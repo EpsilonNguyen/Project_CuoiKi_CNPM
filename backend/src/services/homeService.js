@@ -10,14 +10,16 @@ let handleUserLogin = (email, password) => {
 
             let user = await db.Account.findOne({
                 attributes: ['id', 'email', 'password'],
-                where: { email: email },
+                where: {
+                    email: email,
+                    password: password
+                },
                 raw: true
             });
 
             if (user) {
                 //compare password
                 userData.errCode = 0;
-                userData.errMessage = "Succeed!"
                 userData.user = user;
             }
 
@@ -28,30 +30,6 @@ let handleUserLogin = (email, password) => {
     })
 }
 
-let handleGetListCamera = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let listCamera = {};
-
-            let result = await db.Camera.findAll({
-                attributes: ['id', 'serial', 'homeID', 'connection', 'securityLevel'],
-                raw: true
-            });
-
-            if (result) {
-                listCamera.errCode = 0;
-                listCamera.errMessage = "Succeed!";
-                listCamera.list = result;
-            }
-
-            resolve(listCamera);
-        } catch (error) {
-            reject(error)
-        }
-    })
-}
-
 module.exports = {
     handleUserLogin: handleUserLogin,
-    handleGetListCamera: handleGetListCamera,
 }

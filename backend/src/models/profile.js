@@ -3,7 +3,7 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Camera extends Model {
+    class Profile extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,20 +11,17 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Camera.hasMany(models.Alert, { foreignKey: 'id_camera', as: 'CameraData' });
-
-            Camera.belongsTo(models.Area, { foreignKey: 'id_area', targetKey: 'id', as: 'AreaData' });
         }
     }
-    Camera.init({
-        serial: DataTypes.STRING,
+    Profile.init({
+        name: DataTypes.STRING,
+        display_name: DataTypes.STRING,
         id_area: DataTypes.INTEGER,
-        homeID: DataTypes.STRING,
-        connection: DataTypes.STRING,
-        securityLevel: DataTypes.STRING
+        serial: DataTypes.STRING,
+        image: DataTypes.STRING,
     }, {
         sequelize,
-        modelName: 'Camera',
+        modelName: 'Profile',
     });
-    return Camera;
+    return Profile;
 };
